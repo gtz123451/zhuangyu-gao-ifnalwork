@@ -1,0 +1,139 @@
+<html>
+    <head>
+    
+        <script>window.onerror = function(error, url, line) {parent.postMessage(["console", "❌ -- [ERROR] -- ❌ -- ⚠️ " + error], "*")};var cl = console.log;console.log = function () {var msg = [...arguments].join();parent.postMessage(["console", msg], "*");  }  </script><script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js">
+</script>
+        <script crossorigin src="orbitControls.js">
+</script>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
+       
+    </head>
+    <body>
+        <script id="vertexShader" type="x-shader/x-vertex">
+            
+		
+	
+       
+</script>
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            
+
+
+	
+       
+</script>
+        <script>
+          
+       //set up the camera
+      
+            const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000);
+            const scene = new THREE.Scene();
+
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            
+             //create object        
+            const geometry = new THREE.SphereGeometry(2.5, 100, 100);//resize object
+            var myTextureLoader = new THREE.TextureLoader();
+	          var myTexture = myTextureLoader.load('sun.jpeg');  
+          //Paste the texture of the sun
+	          var material = new THREE.MeshBasicMaterial({map: myTexture});
+            const cube = new THREE.Mesh(geometry,material);
+          
+         // //create backgourd        
+          const geometry2 = new THREE.BoxGeometry(70,70,10);
+            var myTextureLoader2 = new THREE.TextureLoader();
+	          var myTexture2 = myTextureLoader.load('uver.jpeg');    
+	          var material2 = new THREE.MeshBasicMaterial({map: myTexture2});
+            const cube2 = new THREE.Mesh(geometry2,material2);
+            cube2.position.set( 0, 0,-20 );
+            scene.add(cube2);
+                               
+        // //create the moon    
+          const geometry3 = new THREE.SphereGeometry(1.5,100,100);
+            var myTextureLoader3 = new THREE.TextureLoader();
+	          var myTexture3 = myTextureLoader.load('moon.jpeg');    
+	          var material3 = new THREE.MeshBasicMaterial({map: myTexture3});
+            const cube3 = new THREE.Mesh(geometry3,material3);
+            cube3.position.set( 4, 2, 10 );
+
+            camera.position.z = 5;
+           
+  
+    
+    // //create the earth    
+    const geometry4 = new THREE.SphereGeometry(1.5,100,100);
+            var myTextureLoader4 = new THREE.TextureLoader();
+	          var myTexture4 = myTextureLoader.load('earth.jpeg');    
+	          var material4 = new THREE.MeshBasicMaterial({map: myTexture4});
+            const cube4 = new THREE.Mesh(geometry4,material4);
+            cube4.position.set( -5, -2, 4 );
+
+     //create the venus           
+   const geometry5 = new THREE.SphereGeometry(2,100,100);
+            var myTextureLoader5 = new THREE.TextureLoader();
+	          var myTexture5 = myTextureLoader.load('venus.jpeg');    
+	          var material5 = new THREE.MeshBasicMaterial({map: myTexture5});
+            const cube5 = new THREE.Mesh(geometry5,material5);
+            cube5.position.set( -10, 1, -10 );
+
+   //create the uranus            
+          const geometry6 = new THREE.SphereGeometry(4,100,100);
+            var myTextureLoader6 = new THREE.TextureLoader();
+	          var myTexture6 = myTextureLoader.load('uranus.jpeg');    
+	          var material6 = new THREE.MeshBasicMaterial({map: myTexture6});
+            const cube6 = new THREE.Mesh(geometry6,material6);
+            cube6.position.set( 14, -7, 4 );
+
+        //create the Mercury    
+           const geometry7 = new THREE.SphereGeometry(2,100,100);
+            var myTextureLoader7 = new THREE.TextureLoader();
+	          var myTexture7 = myTextureLoader.load('water.jpeg');    
+	          var material7 = new THREE.MeshBasicMaterial({map: myTexture7});
+            const cube7 = new THREE.Mesh(geometry7,material7);
+            cube7.position.set( -6, 5, -16);
+                  
+          
+          
+             const spotLight = new THREE.SpotLight( 0xffffff );
+            spotLight.position.set( 10, 10, 10 );
+            scene.add( spotLight );
+            const group = new THREE.Group();
+            group.add(cube);
+            group.add(cube3);
+          group.add(cube4);
+          group.add(cube5);
+          group.add(cube6);
+          group.add(cube7);
+          
+            scene.add( group );
+          
+            const animate = function() {
+                requestAnimationFrame(animate);
+//Set the speed and angle of planet rotation
+                group.rotation.y += 0.01;
+                cube3.rotation.y += 0.02;
+                cube.rotation.y += -0.012;
+              cube2.rotation.z += 0.0002
+              cube4.rotation.z += 0.0002
+              cube5.rotation.z += 0.02
+	cube6.rotation.z += 0.01
+              cube4.rotation.z += 0.01
+              group.add(cube6);
+                renderer.render(scene, camera);
+              cube7.rotation.y += 0.021
+            };
+
+            animate();
+            function onMouseMove(event) {
+                uniforms.mouse.value.x = 20 * (event.clientX / window.innerWidth);
+                uniforms.mouse.value.y = 2 * (1 - (event.clientY) / window.innerHeight);
+            }
+                                       
+       
+</script>
+    </body>
+</html>
